@@ -8,8 +8,8 @@
         <version>2.5.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.example</groupId>
-    <artifactId>demo</artifactId>
+    <groupId>edu.tntech.csc2310</groupId>
+    <artifactId>CoursePR</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>CoursePR</name>
     <description>Course Prerequisites Service</description>
