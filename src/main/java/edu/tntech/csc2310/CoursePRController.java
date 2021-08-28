@@ -1,5 +1,7 @@
 package edu.tntech.csc2310;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,14 +23,14 @@ public class CoursePRController {
     private final AtomicLong counter = new AtomicLong();
 
     /**
-     * prerequisites service returns a json array formatted as [[ from, to, weight], *]
+     * prerequisites service returns a json array formatted as [[ from, to, weight], *]. Java objects are
+     * automatically serialized into JSON objects.
      * @param prefix
      * @return
      */
     @GetMapping("/prerequisites")
     public CoursePR prerequisites(@RequestParam(value = "prefix", defaultValue = "CSC") String prefix) {
-        String text = "%s," + this.fetchData();
-        return new CoursePR(counter.incrementAndGet(), String.format(text,prefix));
+        return new CoursePR(counter.incrementAndGet(), fetchData(prefix));
     }
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CoursePRController.class.getName());
@@ -37,21 +39,33 @@ public class CoursePRController {
      * fetchData demonstrates how to read file data on the server from the resources directory
      * @return
      */
-    public String fetchData(){
+    public ArrayList<HashMap<String, String>> fetchData(String prefix){
 
-        String result = new String();
+        ArrayList<HashMap<String, String>> list = new ArrayList<>();
         try {
             File file = ResourceUtils.getFile("classpath:test.csv");
+
             Scanner s = new Scanner(file);
-            while (s.hasNext()){
-                result = result + s.next() + ",";
+            s.useDelimiter(",");
+            while (s.hasNextLine()){
+                String line = s.nextLine();
+                Scanner lineScan = new Scanner(line);
+                lineScan.useDelimiter(",");
+                String from = lineScan.next();
+                String to = lineScan.next();
+                String weight = lineScan.next();
+                HashMap<String, String> map = new HashMap<>();
+                map.put("from", from);
+                map.put("to", to);
+                map.put("weight", weight);
+                list.add(map);
             }
-            result = result + "end";
             s.close();
         } catch (IOException e) {
             LOGGER.error(e.getMessage());
         }
-        return result;
+
+        return list;
     }
 
 }

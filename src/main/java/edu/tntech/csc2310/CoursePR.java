@@ -1,21 +1,25 @@
 package edu.tntech.csc2310;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class CoursePR {
 
     private final long id;
-    private final String content;
 
-    public CoursePR(long id, String content) {
+    private final ArrayList<HashMap<String, String>> adjlist;
+
+    public CoursePR(long id, ArrayList<HashMap<String, String>> adjlist) {
         this.id = id;
-        this.content = content;
+        this.adjlist = adjlist;
+    }
+
+    public ArrayList<HashMap<String, String>> getAdjacencyList() {
+        return adjlist;
     }
 
     public long getId() {
-        return this.id;
-    }
-
-    public String getContent() {
-        return this.content;
+        return id;
     }
 
 }

@@ -9,31 +9,40 @@
         google.charts.load('current', {'packages':['sankey']});
         google.charts.setOnLoadCallback(drawChart);
 
-        function drawChart() {
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'From');
-            data.addColumn('string', 'To');
-            data.addColumn('number', 'Weight');
-            var rows = [
-                [ 'A', 'Y', 7 ],
-                [ 'A', 'Z', 6 ],
-                [ 'B', 'X', 2 ],
-                [ 'B', 'Y', 9 ],
-                [ 'B', 'Z', 4 ],
-                [ 'C', 'X', 2 ],
-                [ 'A', 'C', 4 ]
-            ];
-            data.addRows(rows);
+        async function drawChart() {
 
-            // Sets chart options.
-            var options = {
-                width: 900,
-                sankey: { node: { nodePadding: 80 } },
-            };
+            let request = new XMLHttpRequest();
+            var jsondata;
+            request.open("GET", "http://localhost:8080/prerequisites");
+            request.send();
+            request.onload = () => {
+                if (request.status == 200){
+                    jsondata = JSON.parse(request.response);
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'From');
+                    data.addColumn('string', 'To');
+                    data.addColumn('number', 'Weight');
 
-            // Instantiates and draws our chart, passing in some options.
-            var chart = new google.visualization.Sankey(document.getElementById('sankey_basic'));
-            chart.draw(data, options);
+                    console.log("Reading data");
+                    console.log(jsondata);
+                    for (let i = 0; i < jsondata.adjacencyList.length; i++){
+                        row = [jsondata.adjacencyList[i].from,jsondata.adjacencyList[i].to,parseInt(jsondata.adjacencyList[i].weight)];
+                        data.addRow(row);
+                    }
+                    // Sets chart options.
+                    var options = {
+                        width: 900,
+                        sankey: { node: { nodePadding: 80 } },
+                    };
+
+                    // Instantiates and draws our chart, passing in some options.
+                    var chart = new google.visualization.Sankey(document.getElementById('sankey_basic'));
+                    chart.draw(data, options);
+
+                } else {
+                    console.log("Error");
+                }
+            }
         }
     </script>
 </head>

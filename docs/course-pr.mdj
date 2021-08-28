@@ -247,7 +247,7 @@
 											"font": "Helvetica;14;0",
 											"left": 677,
 											"top": 165,
-											"width": 130.34765625,
+											"width": 167.6923828125,
 											"height": 14,
 											"text": "«bean»"
 										},
@@ -260,7 +260,7 @@
 											"font": "Helvetica;14;1",
 											"left": 677,
 											"top": 181,
-											"width": 130.34765625,
+											"width": 167.6923828125,
 											"height": 14,
 											"text": "CoursePR"
 										},
@@ -295,7 +295,7 @@
 									"font": "Helvetica;14;0",
 									"left": 672,
 									"top": 160,
-									"width": 140.34765625,
+									"width": 177.6923828125,
 									"height": 40,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF7Ns4hTuSS+Cc="
@@ -332,7 +332,7 @@
 											"font": "Helvetica;14;0",
 											"left": 677,
 											"top": 205,
-											"width": 130.34765625,
+											"width": 167.6923828125,
 											"height": 14,
 											"text": "-long id",
 											"horizontalAlignment": 0
@@ -349,16 +349,16 @@
 											"font": "Helvetica;14;0",
 											"left": 677,
 											"top": 221,
-											"width": 130.34765625,
+											"width": 167.6923828125,
 											"height": 14,
-											"text": "-String content",
+											"text": "-ArrayList list",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Helvetica;14;0",
 									"left": 672,
 									"top": 200,
-									"width": 140.34765625,
+									"width": 177.6923828125,
 									"height": 40
 								},
 								{
@@ -383,7 +383,7 @@
 											"font": "Helvetica;14;0",
 											"left": 677,
 											"top": 245,
-											"width": 130.34765625,
+											"width": 167.6923828125,
 											"height": 14,
 											"text": "+getId(): long",
 											"horizontalAlignment": 0
@@ -400,16 +400,16 @@
 											"font": "Helvetica;14;0",
 											"left": 677,
 											"top": 261,
-											"width": 130.34765625,
+											"width": 167.6923828125,
 											"height": 14,
-											"text": "+getContent(): String",
+											"text": "+getAdjacencyList(): String",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Helvetica;14;0",
 									"left": 672,
 									"top": 240,
-									"width": 140.34765625,
+									"width": 177.6923828125,
 									"height": 40
 								},
 								{
@@ -449,7 +449,7 @@
 							"containerChangeable": true,
 							"left": 672,
 							"top": 160,
-							"width": 140.34765625,
+							"width": 177.6923828125,
 							"height": 120,
 							"nameCompartment": {
 								"$ref": "AAAAAAF7Ns4hTuSREx4="
@@ -4078,7 +4078,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF7Ns2nueSEiNk="
 									},
-									"name": "String prefix"
+									"name": "String prefix",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -4111,7 +4112,8 @@
 								"$ref": "AAAAAAF7Ns4hTuSO2dk="
 							},
 							"name": "long id",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -4119,7 +4121,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF7Ns4hTuSO2dk="
 							},
-							"name": "String content",
+							"name": "ArrayList list",
 							"visibility": "private"
 						}
 					],
@@ -4149,7 +4151,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF7Ns4hTuSO2dk="
 							},
-							"name": "getContent",
+							"name": "getAdjacencyList",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -4245,7 +4247,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF7NtzeXPWBOT0="
 									},
-									"name": "String prefix"
+									"name": "String prefix",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -4273,7 +4276,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF7NvPJ1Aj0Ilk="
 									},
-									"name": "String prefix"
+									"name": "String prefix",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -4281,7 +4285,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF7NvPJ1Aj0Ilk="
 									},
-									"name": "PRGraph graph"
+									"name": "PRGraph graph",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -4308,7 +4313,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF7NvYCyQzMwQ0="
 									},
-									"name": "String prefix"
+									"name": "String prefix",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -4412,7 +4418,8 @@
 									"_parent": {
 										"$ref": "AAAAAAF7NtbZ6Ot1s9Y="
 									},
-									"name": "PRNode"
+									"name": "PRNode",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -4673,7 +4680,8 @@
 								"$ref": "AAAAAAF7NtIWM+bHzyo="
 							},
 							"name": "PRNode from",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -4682,7 +4690,8 @@
 								"$ref": "AAAAAAF7NtIWM+bHzyo="
 							},
 							"name": "PRNode to",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						}
 					]
 				},
@@ -4716,7 +4725,8 @@
 								"$ref": "AAAAAAF7O1LbiREy/yc="
 							},
 							"name": "String deptCode",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -4725,7 +4735,8 @@
 								"$ref": "AAAAAAF7O1LbiREy/yc="
 							},
 							"name": "String number",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						}
 					]
 				},
@@ -4759,7 +4770,8 @@
 								"$ref": "AAAAAAF7O1MHnxI+GYg="
 							},
 							"name": "int min",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -4768,7 +4780,8 @@
 								"$ref": "AAAAAAF7O1MHnxI+GYg="
 							},
 							"name": "int max",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						}
 					]
 				},
