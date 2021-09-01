@@ -4122,7 +4122,8 @@
 								"$ref": "AAAAAAF7Ns4hTuSO2dk="
 							},
 							"name": "ArrayList list",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						}
 					],
 					"operations": [
