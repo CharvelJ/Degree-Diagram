@@ -54,10 +54,12 @@ public class CoursePRController {
                 String from = lineScan.next();
                 String to = lineScan.next();
                 String weight = lineScan.next();
+                String title = lineScan.next();
                 HashMap<String, String> map = new HashMap<>();
                 map.put("from", from);
                 map.put("to", to);
                 map.put("weight", weight);
+                map.put("title", title);
                 list.add(map);
             }
             s.close();

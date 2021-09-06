@@ -18,17 +18,23 @@ async function drawChart() {
             data.addColumn('string', 'From');
             data.addColumn('string', 'To');
             data.addColumn('number', 'Weight');
+            data.addColumn({type:'string', role:'tooltip'});
 
             console.log("Reading data");
             console.log(jsondata);
             for (let i = 0; i < jsondata.adjacencyList.length; i++){
-                row = [jsondata.adjacencyList[i].from,jsondata.adjacencyList[i].to,parseInt(jsondata.adjacencyList[i].weight)];
+                row = [jsondata.adjacencyList[i].from,jsondata.adjacencyList[i].to,parseInt(jsondata.adjacencyList[i].weight),jsondata.adjacencyList[i].title];
                 data.addRow(row);
             }
             // Sets chart options.
             var options = {
                 width: 900,
-                sankey: { node: { nodePadding: 80 } },
+                sankey: {
+                    node: { nodePadding: 80,
+                            interactivity: true
+                    },
+                },
+                tooltip: {isHtml: true}
             };
 
             // Instantiates and draws our chart, passing in some options.
