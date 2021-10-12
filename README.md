@@ -9,3 +9,5 @@ Setup Maven Wrapper (mvnw): ``mvn -N io.takari:maven:wrapper``
 
 Build and Run: ``./mvnw spring-boot:run``
 
+View Application: ``https://localhost:8080``
+

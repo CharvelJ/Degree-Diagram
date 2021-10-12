@@ -17,7 +17,7 @@ import java.io.File;
 import java.util.Scanner;
 
 @RestController
-public class CoursePRController {
+public class CoursePRGraph {
 
 
     private final AtomicLong counter = new AtomicLong();
@@ -33,7 +33,7 @@ public class CoursePRController {
         return new CoursePR(counter.incrementAndGet(), fetchData(prefix));
     }
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CoursePRController.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(CoursePRGraph.class.getName());
 
     /**
      * fetchData demonstrates how to read file data on the server from the resources directory
