@@ -9,8 +9,8 @@
     <script type="text/javascript" src="js/coursepr.js"></script>
 </head>
 <body>
-<section class="section">
-    <div class="container">
+<section class="section is-fullhd">
+    <div class="container is-fullhd">
         <h1 class="title">
             Course Pre-requisite Browser
         </h1>
@@ -27,7 +27,7 @@
                       <select id="codemenu" onchange="selectionChange();">
                         <option selected value="CSC">Computer Science (CSC)</option>
                         <option value="ME">Mechanical Engineering (ME)</option>
-                        <option value="ENG">English (ENG)</option>
+                        <option value="ENGL">English (ENGL)</option>
                       </select>
                     </span>
                 <span class="icon is-small is-left">
@@ -38,7 +38,7 @@
         <div class="control">
             <button class="button is-primary" onclick="drawChart()">Submit</button>
         </div>
-        <div id="sankey_basic" style="width: 900px; height: 300px;"></div>
+        <div id="sankey_multiple" class="container is-fullhd" style="width: auto; overflow-x: scroll; overflow-y: scroll;"></div>
     </div>
 </section>
 </body>

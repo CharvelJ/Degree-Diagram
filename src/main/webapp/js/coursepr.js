@@ -1,10 +1,12 @@
 google.charts.load('current', {'packages':['sankey']});
 //        google.charts.setOnLoadCallback(drawChart);
 
+var inputTextField;
+
 async function drawChart() {
 
-    var inputTextField = document.getElementById('codefield');
-    var serviceURL = "http://localhost:8080/prerequisites?dept=" + inputTextField.value;
+    inputTextField = document.getElementById("codefield");
+    var serviceURL = "http://localhost:8080/prerequisites?prefix=" + inputTextField.value;
     console.log(serviceURL);
 
     let request = new XMLHttpRequest();
@@ -28,17 +30,18 @@ async function drawChart() {
             }
             // Sets chart options.
             var options = {
-                width: 900,
                 sankey: {
-                    node: { nodePadding: 80,
-                            interactivity: true
+                    node: { nodePadding: 40,
+                            interactivity: true,
+                            width: 10
                     },
                 },
-                tooltip: {isHtml: true}
+                tooltip: {isHtml: true},
+                height: jsondata.adjacencyList.length * 20
             };
 
             // Instantiates and draws our chart, passing in some options.
-            var chart = new google.visualization.Sankey(document.getElementById('sankey_basic'));
+            var chart = new google.visualization.Sankey(document.getElementById('sankey_multiple'));
             chart.draw(data, options);
 
         } else {
@@ -49,8 +52,9 @@ async function drawChart() {
 
 
 function selectionChange(){
-    var inputTextField = document.getElementById('codefield');
-    var inputDropdown = document.getElementById('codemenu');
+    inputTextField = document.getElementById("codefield");
+    var inputDropdown = document.getElementById("codemenu");
 
     inputTextField.value = inputDropdown.options[inputDropdown.selectedIndex].value;
+    console.log(inputTextField.value);
 }
