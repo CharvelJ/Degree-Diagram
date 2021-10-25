@@ -3,7 +3,6 @@ package edu.tntech.csc2310;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicLong;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +12,6 @@ import org.slf4j.LoggerFactory;
 
 @RestController
 public class CoursePRGraph {
-
 
     private final AtomicLong counter = new AtomicLong();
 
@@ -25,7 +23,11 @@ public class CoursePRGraph {
      */
     @GetMapping("/prerequisites")
     public CoursePR prerequisites(@RequestParam(value = "prefix") String prefix) {
-        return new CoursePR(counter.incrementAndGet(), GenerateAdjacencyList(prefix));
+
+        ArrayList<HashMap<String,String>> adjlist = GenerateAdjacencyList(prefix);
+        CoursePR cpr = new CoursePR(counter.incrementAndGet(), adjlist);
+        return cpr;
+
     }
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CoursePRGraph.class.getName());
@@ -34,7 +36,7 @@ public class CoursePRGraph {
      * fetchData demonstrates how to read file data on the server from the resources directory
      * @return
      */
-    public ArrayList<HashMap<String, String>> GenerateAdjacencyList(String prefix){
+    private ArrayList<HashMap<String, String>> GenerateAdjacencyList(String prefix){
 
         ArrayList<HashMap<String, String>> adjList = new ArrayList<>();
 
@@ -59,5 +61,4 @@ public class CoursePRGraph {
         }
         return adjList;
     }
-
 }

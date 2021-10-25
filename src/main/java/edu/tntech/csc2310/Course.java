@@ -24,8 +24,8 @@ public class Course {
         String searchUrl = url + "&cat_term_in=" + term + "&subj_code_in=" + subject + "&crse_numb_in=" + number;
         try {
             Document doc = Jsoup.connect(searchUrl).get();
-            Elements courseTitle = doc.select(".nttitle");
-            String temp = (String)courseTitle.get(0).text();
+            Elements elements = doc.select(".nttitle");
+            String temp = (String)elements.get(0).text();
             int index = temp.indexOf('-');
             this.title = temp.substring(index + 2);
 

@@ -12,14 +12,18 @@ import java.util.Scanner;
 public class CourseCatalog {
 
     private ArrayList<Course> db;
+    private String catalogYear;
+    private String subject;
 
     public CourseCatalog(String subject, String catalogYear) {
 
+        this.catalogYear = catalogYear;
+        this.subject = subject;
         this.db = new ArrayList();
-        ArrayList<String> list = CourseCatalog.getCourseNumbers(subject, catalogYear);
+        ArrayList<String> list = CourseCatalog.getCourseNumbers(this.subject, this.catalogYear);
 
         for (String s: list){
-            Course c = new Course(subject, s, catalogYear);
+            Course c = new Course(subject, s, this.catalogYear);
             this.db.add(c);
         }
     }
@@ -46,8 +50,8 @@ public class CourseCatalog {
         ArrayList<String> list = new ArrayList();
         try {
             doc = Jsoup.connect("https://ttuss1.tntech.edu/PROD/bwckctlg.p_display_courses?sel_crse_strt=1000&sel_crse_end=4999&sel_subj=&sel_levl=&sel_schd=&sel_coll=&sel_divs=&sel_dept=&sel_attr="+"&term_in="+catalogYear+"&one_subj="+subject).get();
-            Elements courseTitle = doc.select(".nttitle");
-            for (Element title : courseTitle) {
+            Elements courseTitles = doc.select(".nttitle");
+            for (Element title : courseTitles) {
                 String line = title.text();
                 Scanner scan = new Scanner(line);
                 scan.useDelimiter(" ");

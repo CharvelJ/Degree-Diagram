@@ -37,7 +37,7 @@ async function drawChart() {
                     },
                 },
                 tooltip: {isHtml: true},
-                height: jsondata.adjacencyList.length * 20
+                height: jsondata.adjacencyList.length * 25
             };
 
             // Instantiates and draws our chart, passing in some options.
