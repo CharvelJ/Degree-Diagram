@@ -15,6 +15,14 @@ public class CourseCatalog {
     private String catalogYear;
     private String subject;
 
+    public String getCatalogYear() {
+        return catalogYear;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
     public CourseCatalog(String subject, String catalogYear) {
 
         this.catalogYear = catalogYear;

@@ -11,7 +11,6 @@ public class CourseTest {
 
     @Before
     public void setUp() throws Exception {
-
     }
 
     @Test
