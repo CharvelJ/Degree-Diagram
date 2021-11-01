@@ -3,34 +3,31 @@ package edu.tntech.csc2310;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicLong;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.ResourceUtils;
-
-import java.io.IOException;
-import java.io.File;
-import java.util.Scanner;
 
 @RestController
 public class CoursePRGraph {
-
 
     private final AtomicLong counter = new AtomicLong();
 
     /**
      * prerequisites service returns a json array formatted as [[ from, to, weight], *]. Java objects are
-     * automatically serialized into JSON objects.
+     * automatically serialized into JSON objects. , defaultValue = "CSC"
      * @param prefix
      * @return
      */
     @GetMapping("/prerequisites")
-    public CoursePR prerequisites(@RequestParam(value = "prefix", defaultValue = "CSC") String prefix) {
-        return new CoursePR(counter.incrementAndGet(), fetchData(prefix));
+    public CoursePR prerequisites(@RequestParam(value = "prefix") String prefix) {
+
+        ArrayList<HashMap<String,String>> adjlist = GenerateAdjacencyList(prefix);
+        CoursePR cpr = new CoursePR(counter.incrementAndGet(), adjlist);
+        return cpr;
+
     }
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CoursePRGraph.class.getName());
@@ -39,35 +36,29 @@ public class CoursePRGraph {
      * fetchData demonstrates how to read file data on the server from the resources directory
      * @return
      */
-    public ArrayList<HashMap<String, String>> fetchData(String prefix){
+    private ArrayList<HashMap<String, String>> GenerateAdjacencyList(String prefix){
 
-        ArrayList<HashMap<String, String>> list = new ArrayList<>();
-        try {
-            File file = ResourceUtils.getFile("classpath:test.csv");
+        ArrayList<HashMap<String, String>> adjList = new ArrayList<>();
 
-            Scanner s = new Scanner(file);
-            s.useDelimiter(",");
-            while (s.hasNextLine()){
-                String line = s.nextLine();
-                Scanner lineScan = new Scanner(line);
-                lineScan.useDelimiter(",");
-                String from = lineScan.next();
-                String to = lineScan.next();
-                String weight = lineScan.next();
-                String title = lineScan.next();
-                HashMap<String, String> map = new HashMap<>();
-                map.put("from", from);
-                map.put("to", to);
-                map.put("weight", weight);
-                map.put("title", title);
-                list.add(map);
+        CourseCatalog catalog = new CourseCatalog(prefix, "202180");
+        //
+        ArrayList crseList = CourseCatalog.getCourseNumbers(prefix, "202180");
+        for (int i = 0; i < crseList.size(); i++) {
+            Course c = catalog.getCourse((String)crseList.get(i));
+            String[] prereqs = c.getPrerequisites();
+            String toCourse = c.getSubject() + " " + c.getNumber();
+            if (prereqs != null){
+                for (int j = 0; j < prereqs.length; j++) {
+                    String fromCourse = prereqs[j];
+                    HashMap<String, String> map = new HashMap<>();
+                    map.put("from", fromCourse.trim());
+                    map.put("to", toCourse);
+                    map.put("weight", "1");
+                    map.put("title", "<div><a class=\"button is-small\">" + fromCourse.trim() + " > " + toCourse + "</a></div>");
+                    adjList.add(map);
+                }
             }
-            s.close();
-        } catch (IOException e) {
-            LOGGER.error(e.getMessage());
         }
-
-        return list;
+        return adjList;
     }
-
 }

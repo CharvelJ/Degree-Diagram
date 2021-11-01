@@ -18,14 +18,12 @@ public class CourseCatalogTest {
 
     @Test
     public void getCourse() {
-
         Course c = catalog.getCourse("2770");
         assertEquals("Course test", "Intro to Systems & Networking", c.getTitle());
+        assertEquals("Course test credits", 3, c.getCredits());
         Course c1 = catalog.getCourse("2001");
         assertNull(c1);
-
     }
-
 
     @Test
     public void getCourseNumbers() {
@@ -33,5 +31,15 @@ public class CourseCatalogTest {
         assertEquals("CourseNumber test", 124, list.size());
         list = CourseCatalog.getCourseNumbers("COMM", "202180");
         assertEquals("CourseNumber test", 47, list.size());
+    }
+
+    @Test
+    public void getCatalogYear() {
+        assertEquals("Catalog Year", "202180", catalog.getCatalogYear());
+    }
+
+    @Test
+    public void getSubject() {
+        assertEquals("Subject", "CSC", catalog.getSubject());
     }
 }
