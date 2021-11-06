@@ -47,12 +47,16 @@ public class CourseCatalog {
         return result;
     }
 
+    public ArrayList<Course> getCourses(){
+        return db;
+    }
+
     public String toString(){
         return this.db.toString();
     }
 
     @SuppressWarnings("SpellCheckingInspection")
-    public static ArrayList<String> getCourseNumbers(String subject, String catalogYear){
+    private static ArrayList<String> getCourseNumbers(String subject, String catalogYear){
 
         Document doc = null;
         ArrayList<String> list = new ArrayList();
@@ -72,6 +76,8 @@ public class CourseCatalog {
         }
         return list;
     }
+
+
 
     private static void log(String msg, String... vals) {
         System.out.println(String.format(msg, vals));

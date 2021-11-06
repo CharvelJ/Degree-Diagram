@@ -27,10 +27,11 @@ public class CourseCatalogTest {
 
     @Test
     public void getCourseNumbers() {
-        ArrayList list = CourseCatalog.getCourseNumbers("CSC", "202180");
-        assertEquals("CourseNumber test", 124, list.size());
-        list = CourseCatalog.getCourseNumbers("COMM", "202180");
-        assertEquals("CourseNumber test", 47, list.size());
+        ArrayList list = catalog.getCourses();
+        assertEquals("CourseNumber test", 62, list.size());
+        CourseCatalog c2 = new CourseCatalog("COMM", "202180");
+        list = c2.getCourses();
+        assertEquals("CourseNumber test", 37, list.size());
     }
 
     @Test
