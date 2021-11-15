@@ -28,11 +28,11 @@ public class CourseTest {
         data = new Course("NURS", "4575", "202180");
         assertNull("Non existent",data.getSubject());
         assertNull("Non existent", data.getNumber());
-        assertEquals("Non existent", 0, data.getCredits());
+        assertEquals("Non existent", -1, data.getCredits());
     }
 
     @Test
-    public void getSubjectTrim() throws IOException {
+    public void getSubjectNumberTrim() throws IOException {
         data = new Course("CSC ", "1300", "202180");
         assertEquals("Subject", "CSC", data.getSubject());
         data = new Course(" COMM ", " 1020", " 202180");
@@ -42,7 +42,7 @@ public class CourseTest {
     @Test
     public void getCatalogisNum() throws IOException {
         try {
-            data = new Course(" COMM ", " 1020", "a202180");
+            data = new Course("COMM ", "1020", "a202180");
         } catch (NumberFormatException ex){
             assertNull(data);
         }
@@ -67,10 +67,13 @@ public class CourseTest {
     }
 
     @Test
+    public void getNullTitle() throws IOException {
+        data = new Course("CSC", "1000", "202180");
+        assertNull("No course, Title Null", data.getTitle());
+    }
+
+    @Test
     public void getPrerequisites() throws IOException {
-        // CSC 1020 has no course pre-requisites; just a standing
-        data = new Course("CSC", "1020", "202180");
-        assertNull(data.getPrerequisites());
 
         // CSC 1300 has three course-based pre-requisites
         data = new Course("CSC", "1300", "202180");
@@ -88,18 +91,18 @@ public class CourseTest {
         }
     }
 
-    @Test
-    public void getPrereqMissing() throws IOException {
-        data = new Course("COMM", "1020", "202180");
-        String[] aresults = data.getPrerequisites();
-        assertNull(aresults);
-    }
 
     @Test
     public void getNoPrereqs() throws IOException {
         data = new Course("NURS", "4500", "202180");
         String[] aresults = data.getPrerequisites();
-        assertNull(aresults);
+        assertNull("Course with no prereq", aresults);
+    }
+
+    @Test
+    public void getNoCoursePrereqs() throws IOException {
+        data = new Course("NURS", "4575", "202180");
+        assertNull("Null course no prereq", data.getPrerequisites());
     }
 
     @Test

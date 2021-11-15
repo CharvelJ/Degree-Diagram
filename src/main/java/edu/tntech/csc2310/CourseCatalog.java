@@ -23,6 +23,10 @@ public class CourseCatalog {
         return subject;
     }
 
+    public ArrayList<Course> getCourses(){
+        return db;
+    }
+
     public CourseCatalog(String subject, String catalogYear) {
 
         String subj = subject.trim().toUpperCase();

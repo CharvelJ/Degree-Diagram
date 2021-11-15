@@ -93,16 +93,18 @@ public class Course {
                 ")"
                 };
 
-        int sindex = this.description.lastIndexOf("Requirements:");
         String[] list = null;
-        if (sindex > 0) {
-            String subStr = this.description.substring(sindex + 13).trim();
-            for (int i = 0; i < repls.length; i++) {
-                subStr = subStr.replace(repls[i], "");
+        if (this.description != null) {
+            int sindex = this.description.lastIndexOf("Requirements:");
+            if (sindex > 0) {
+                String subStr = this.description.substring(sindex + 13).trim();
+                for (int i = 0; i < repls.length; i++) {
+                    subStr = subStr.replace(repls[i], "");
+                }
+                subStr = subStr.replace("or", ",");
+                subStr = subStr.replace("and", ",");
+                list = subStr.split(",");
             }
-            subStr = subStr.replace("or", ",");
-            subStr = subStr.replace("and", ",");
-            list = subStr.split(",");
         }
         return list;
     }
