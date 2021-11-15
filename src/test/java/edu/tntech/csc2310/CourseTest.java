@@ -3,6 +3,8 @@ package edu.tntech.csc2310;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.*;
 
 public class CourseTest {
@@ -14,28 +16,64 @@ public class CourseTest {
     }
 
     @Test
-    public void getSubject() {
+    public void getSubject() throws IOException {
         data = new Course("CSC", "1300", "202180");
         assertEquals("Subject", "CSC", data.getSubject());
+        data = new Course("COMM", "1020", "202180");
+        assertEquals("Subject", "COMM", data.getSubject());
     }
 
     @Test
-    public void getNumber() {
+    public void courseNotExists() throws IOException {
+        data = new Course("NURS", "4575", "202180");
+        assertNull("Non existent",data.getSubject());
+        assertNull("Non existent", data.getNumber());
+        assertEquals("Non existent", -1, data.getCredits());
+    }
+
+    @Test
+    public void getSubjectNumberTrim() throws IOException {
+        data = new Course("CSC ", "1300", "202180");
+        assertEquals("Subject", "CSC", data.getSubject());
+        data = new Course(" COMM ", " 1020", " 202180");
+        assertEquals("Subject", "COMM", data.getSubject());
+    }
+
+    @Test
+    public void getCatalogisNum() throws IOException {
+        try {
+            data = new Course("COMM ", "1020", "a202180");
+        } catch (NumberFormatException ex){
+            assertNull(data);
+        }
+    }
+
+    @Test
+    public void getNumber() throws IOException {
         data = new Course("CSC", "1300", "202180");
         assertEquals("Subject", "1300", data.getNumber());
     }
 
     @Test
-    public void getTitle() {
+    public void getNumberTrim() throws IOException {
+        data = new Course("COMM ", " 1020 ", "202180");
+        assertEquals("Number", "1020", data.getNumber());
+    }
+
+    @Test
+    public void getTitle() throws IOException {
         data = new Course("CSC", "1300", "202180");
         assertEquals("Title", "Intro/Prob Solving-Comp Prog", data.getTitle());
     }
 
     @Test
-    public void getPrerequisites() {
-        // CSC 1020 has no course pre-requisites; just a standing
-        data = new Course("CSC", "1020", "202180");
-        assertNull(data.getPrerequisites());
+    public void getNullTitle() throws IOException {
+        data = new Course("CSC", "1000", "202180");
+        assertNull("No course, Title Null", data.getTitle());
+    }
+
+    @Test
+    public void getPrerequisites() throws IOException {
 
         // CSC 1300 has three course-based pre-requisites
         data = new Course("CSC", "1300", "202180");
@@ -53,14 +91,35 @@ public class CourseTest {
         }
     }
 
+
     @Test
-    public void getCRH(){
+    public void getNoPrereqs() throws IOException {
+        data = new Course("NURS", "4500", "202180");
+        String[] aresults = data.getPrerequisites();
+        assertNull("Course with no prereq", aresults);
+    }
+
+    @Test
+    public void getNoCoursePrereqs() throws IOException {
+        data = new Course("NURS", "4575", "202180");
+        assertNull("Null course no prereq", data.getPrerequisites());
+    }
+
+    @Test
+    public void getCRH() throws IOException {
         data = new Course("CSC", "3500", "202180");
         assertTrue("Credit Hours", 1 == data.getCredits());
         data = new Course("CSC", "4100", "202180");
         assertTrue("Credit Hours", 3 == data.getCredits());
         data = new Course("CSC", "3300", "202180");
         assertTrue("Credit Hours", 3 == data.getCredits());
+    }
+
+    @Test
+    public void getCRHNoCourse() throws IOException {
+        data = new Course("NURS", "4575", "202180");
+        assertTrue("Credit Hours - underspecified", -1 == data.getCredits());
+
     }
 
 }
