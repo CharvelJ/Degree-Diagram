@@ -32,6 +32,12 @@ public class CourseCatalog {
         String subj = subject.trim().toUpperCase();
         Integer trm = Integer.parseInt(catalogYear.trim());
 
+        //
+        // Modify this method so that it only scrapes the website (either directly via getCourseNumbers
+        // or indirectly by calling the Course constructor).
+        // This method should check to see if a cached file exists. If so, read the file, if not
+        // process as usual and save to the cached version.
+        //
         this.catalogYear = trm.toString();
         this.subject = subj.toUpperCase();
         this.db = new ArrayList();

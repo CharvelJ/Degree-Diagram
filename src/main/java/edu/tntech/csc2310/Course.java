@@ -21,6 +21,11 @@ public class Course {
 
     public Course(String subject, String number, String term) {
 
+        /**
+         * Modify this method so that it throws a CourseNotFoundException if the course does
+         * not exist.
+         */
+
         String subj = subject.trim().toUpperCase();
         String numb = number.trim();
         Integer trm = Integer.parseInt(term.trim());
