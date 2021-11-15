@@ -53,6 +53,7 @@ public class CoursePRGraph {
                     map.put("from", fromCourse.trim());
                     map.put("to", toCourse);
                     map.put("weight", "1");
+                    // Change this to display html for a more complete description
                     map.put("title", "<div><a class=\"button is-small\">" + fromCourse.trim() + " > " + toCourse + "</a></div>");
                     adjList.add(map);
                 }

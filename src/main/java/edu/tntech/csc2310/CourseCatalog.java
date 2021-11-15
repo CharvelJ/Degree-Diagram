@@ -32,7 +32,10 @@ public class CourseCatalog {
         String subj = subject.trim().toUpperCase();
         Integer trm = Integer.parseInt(catalogYear.trim());
 
-        //
+        // TODO: Add exception handling. This method should specify that it throws an exception
+        // Address the problem of subject and/or catalog year not existing
+
+        // TODO: Implement Caching
         // Modify this method so that it only scrapes the website (either directly via getCourseNumbers
         // or indirectly by calling the Course constructor).
         // This method should check to see if a cached file exists. If so, read the file, if not

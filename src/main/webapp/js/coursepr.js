@@ -15,6 +15,7 @@ async function drawChart() {
 
     request.open("GET", serviceURL); // parameterize using contents of form field
     request.send();
+
     request.onload = () => {
         if (request.status == 200){
             jsondata = JSON.parse(request.response);
@@ -48,6 +49,11 @@ async function drawChart() {
                 // Instantiates and draws our chart, passing in some options.
                 var chart = new google.visualization.Sankey(document.getElementById('sankey_multiple'));
                 chart.draw(data, options);
+                google.visualization.events.addListener(chart, 'select', function(){
+                    var selection = chart.getSelection();
+                    console.log(selection);
+                    msg.innerText = selection[0].name;
+                });
             } else {
                 msg.innerText = "No classes found"
             }
@@ -56,6 +62,7 @@ async function drawChart() {
         }
     }
 }
+
 
 
 function selectionChange(){
