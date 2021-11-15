@@ -21,20 +21,31 @@ public class Course {
 
     public Course(String subject, String number, String term) {
 
-        String searchUrl = url + "&cat_term_in=" + term + "&subj_code_in=" + subject + "&crse_numb_in=" + number;
+        String subj = subject.trim().toUpperCase();
+        String numb = number.trim();
+        Integer trm = Integer.parseInt(term.trim());
+        Integer numbTest = Integer.parseInt(numb);
+
+        String searchUrl = url + "&cat_term_in=" + trm.toString() + "&subj_code_in=" + subj + "&crse_numb_in=" + numbTest.toString();
         try {
             Document doc = Jsoup.connect(searchUrl).get();
             Elements elements = doc.select(".nttitle");
-            String temp = (String)elements.get(0).text();
-            int index = temp.indexOf('-');
-            this.title = temp.substring(index + 2);
+            if (elements.size() > 0) {
+                String temp = (String) elements.get(0).text();
+                int index = temp.indexOf('-');
+                this.title = temp.substring(index + 2);
 
-            Elements courseDescription = doc.select(".ntdefault");
-            this.description = courseDescription.get(0).text();
-
-            this.subject = subject;
-            this.number = number;
-            this.credits = (int)this.parseCRH();
+                Elements courseDescription = doc.select(".ntdefault");
+                this.description = courseDescription.get(0).text();
+                this.subject = subj;
+                this.number = numb;
+                this.credits = (int) this.parseCRH();
+            } else {
+                this.subject = null;
+                this.description = null;
+                this.number = null;
+                this.credits = -1;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -42,7 +42,7 @@ public class CoursePRGraph {
 
         CourseCatalog catalog = new CourseCatalog(prefix, "202180");
         //
-        ArrayList crseList = CourseCatalog.getCourseNumbers(prefix, "202180");
+        ArrayList crseList = CourseCatalog.getCourseNumbers(prefix.trim().toUpperCase(), "202180");
         for (int i = 0; i < crseList.size(); i++) {
             Course c = catalog.getCourse((String)crseList.get(i));
             String[] prereqs = c.getPrerequisites();

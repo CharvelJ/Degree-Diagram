@@ -25,14 +25,22 @@ public class CourseCatalog {
 
     public CourseCatalog(String subject, String catalogYear) {
 
-        this.catalogYear = catalogYear;
-        this.subject = subject;
+        String subj = subject.trim().toUpperCase();
+        Integer trm = Integer.parseInt(catalogYear.trim());
+
+        this.catalogYear = trm.toString();
+        this.subject = subj.toUpperCase();
         this.db = new ArrayList();
         ArrayList<String> list = CourseCatalog.getCourseNumbers(this.subject, this.catalogYear);
-
-        for (String s: list){
-            Course c = new Course(subject, s, this.catalogYear);
-            this.db.add(c);
+        if (list.size() > 0) {
+            for (String s : list) {
+                Course c = new Course(this.subject, s, this.catalogYear);
+                this.db.add(c);
+            }
+        } else {
+            this.subject = null;
+            this.catalogYear = null;
+            this.db = null;
         }
     }
 
