@@ -18,12 +18,14 @@ public class FileDemo {
 
             if (file.createNewFile()) {
                 FileWriter out = new FileWriter(file);
+                //file create new file
                 out.write("My String");
                 out.close();
                 System.out.println("File is created!");
             } else {
                 FileReader in = new FileReader(file);
                 // Do something with the file
+                //read in
                 System.out.println("File already exists.");
             }
         } catch (IOException ex){

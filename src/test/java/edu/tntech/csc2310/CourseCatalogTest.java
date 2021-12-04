@@ -19,34 +19,55 @@ public class CourseCatalogTest {
 
     @Test
     public void getCourse() {
-        Course c = CourseCatalogTest.catalog.getCourse("2770");
-        assertEquals("Course test", "Intro to Systems & Networking", c.getTitle());
-        assertEquals("Course test credits", 3, c.getCredits());
+            Course c = CourseCatalogTest.catalog.getCourse("2770");
+            assertEquals("Course test", "Intro to Systems & Networking", c.getTitle());
+            assertEquals("Course test credits", 3, c.getCredits());
+
+            ///Wrong number.
+            Course wrong = catalog.getCourse("3333");
+            assertNull(wrong);
     }
 
     @Test
     public void getCourseNonExistent() {
         Course c1 = CourseCatalogTest.catalog.getCourse("2001");
         assertNull(c1);
+
+        //Wrong catalog year.
+        assertNotEquals("Catalog Year", "202280", catalog.getCatalogYear());
     }
 
     @Test
-    public void badSubject(){
-        CourseCatalog c = new CourseCatalog("Missing", "202180");
-        assertNull(c.getSubject());
-        assertNull(c.getCatalogYear());
+    public void badSubject() throws CatalogNotFoundException{
+        try {
+            CourseCatalog c = new CourseCatalog("Missing", "202180");
+            assertNull(c.getSubject());
+            assertNull(c.getCatalogYear());
+        }catch(CatalogNotFoundException e) {
+            System.out.println(e);
+        }
+
     }
 
     @Test
-    public void trimSubject(){
-        CourseCatalog c = new CourseCatalog(" CSC ", "202180");
-        assertEquals("subject trim", "CSC", c.getSubject());
+    public void trimSubject() throws CatalogNotFoundException{
+        try {
+            CourseCatalog c = new CourseCatalog(" CSC ", "202180");
+            assertEquals("subject trim", "CSC", c.getSubject());
+        }catch(CatalogNotFoundException e) {
+            System.out.println(e);
+        }
     }
 
     @Test
-    public void toUpperSubject(){
-        CourseCatalog c = new CourseCatalog("math", "202180");
-        assertEquals("subject lowercase", "MATH", c.getSubject());
+    public void toUpperSubject() throws CatalogNotFoundException{
+        try {
+            CourseCatalog c = new CourseCatalog("math", "202180");
+            assertEquals("subject lowercase", "MATH", c.getSubject());
+        }catch (CatalogNotFoundException e) {
+            System.out.println(e);
+        }
+
     }
 
 
@@ -61,10 +82,16 @@ public class CourseCatalogTest {
     @Test
     public void getCatalogYear() {
         assertEquals("Catalog Year", "202180", CourseCatalogTest.catalog.getCatalogYear());
+
+        //Wrong catalog year.
+        assertNotEquals("Catalog Year", "202280", catalog.getCatalogYear());
     }
 
     @Test
     public void getSubject() {
         assertEquals("Subject", "CSC", CourseCatalogTest.catalog.getSubject());
+
+        //Check for lowercase letters
+        assertNotEquals("Subject", "csc", catalog.getSubject());
     }
 }

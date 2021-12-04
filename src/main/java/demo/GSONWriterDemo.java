@@ -34,9 +34,9 @@ public class GSONWriterDemo {
             } else {
                 // The second time you run this, it reads the file
                 FileReader in = new FileReader(file);
-                // Do something with the file
                 JsonReader jr = gson.newJsonReader(in);
                 BeanDemo[] instance = gson.fromJson(jr, BeanDemo[].class);
+                // Do something with the file
                 System.out.println("File already exists.");
             }
         } catch (IOException ex){

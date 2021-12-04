@@ -19,7 +19,19 @@ public class Course {
     private int credits;
     private String[] prerequisites;
 
-    public Course(String subject, String number, String term) {
+    /**
+     *
+     * This constructor will scrape HTML from TTU's catalog entries using jsoup (if valid subject and catalog year).
+     * It will grab the specific HTML class for title, and description of the catalog entries webpage.
+     *
+     * @param subject - Passes in the course subject code to the course constructor.
+     * @param number - Passes in the course number to the course constructor.
+     * @param term - Passes in the courses catalog year to the course constructor.
+     * @throws CourseNotFoundException - When a course subject code does not exist in the catalog entrie webpage, it will throw a new
+     *                                   exception listing the course that does not exist to the user.
+     */
+
+    public Course(String subject, String number, String term) throws CourseNotFoundException {
 
         /**
          * TODO: Add exception support here. This method should specify that it throws an exception
@@ -51,12 +63,17 @@ public class Course {
                 this.description = null;
                 this.number = null;
                 this.credits = -1;
+                throw new CourseNotFoundException(subj);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     *
+     * @return - Will return the parsed temp variable for credit hours as a double to the course constructor.
+     */
     private double parseCRH(){
         int index = this.description.indexOf("Credit hours");
         String tmp = this.description.substring(0, index-1);
@@ -66,26 +83,43 @@ public class Course {
         return Double.parseDouble(tmp);
     }
 
+    /**
+     *
+     * @return - Will return the course subject code to the course constructor.
+     */
     public String getSubject() {
         return subject;
     }
 
+    /**
+     *
+     * @return - Will return the course number as a string to the course constructor.
+     */
     public String getNumber() {
         return number;
     }
 
+    /**
+     *
+     * @return - Will return the course title as a string to the course constructor.
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     *
+     * @return - Will return the course description as a string to the course constructor.
+     */
     public String getDescription() {
         return description;
     }
 
     /**
      * Creates a flattened list of pre-requisites; removes C or D or better information,
-     * as well as disjunctive normal form. All structure should be removed from the pre-requisite list
-     * @return
+     * as well as disjunctive normal form. All structure should be removed from the pre-requisite list.
+     *
+     * @return - Will return the course prerequisites as a string array to the course construcctor.
      */
     public String[] getPrerequisites() {
 
@@ -115,14 +149,28 @@ public class Course {
         return list;
     }
 
+    /**
+     *
+     * @return - Will return the course credit hours to the course constructor.
+     */
     public int getCredits() {
         return credits;
     }
 
+    /**
+     *
+     * @return - Will return the course subject code, number, title, and description.
+     */
     public String toString(){
         return subject + " " + number + " " + title + "\n" + description;
     }
 
+    /**
+     * This function states that it was never used.
+     *
+     * @param full - TBD
+     * @return - TBD
+     */
     public String toString(boolean full){
         if (full)
             return this + this.description;
@@ -130,6 +178,12 @@ public class Course {
             return this.toString();
     }
 
+    /**
+     * This function states that it was never used.
+     *
+     * @param msg - TBD
+     * @param vals - TBD
+     */
     private static void log(String msg, String... vals) {
         System.out.println(String.format(msg, vals));
     }

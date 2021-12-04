@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @RestController
-public class CoursePRGraph {
+public class CoursePRGraph{
 
     private final AtomicLong counter = new AtomicLong();
 
@@ -39,26 +39,30 @@ public class CoursePRGraph {
     private ArrayList<HashMap<String, String>> GenerateAdjacencyList(String prefix){
 
         ArrayList<HashMap<String, String>> adjList = new ArrayList<>();
-
-        CourseCatalog catalog = new CourseCatalog(prefix, "202180");
-        //
-        ArrayList<Course> list = catalog.getCourses();
-        for (Course c: list){
-            String[] prereqs = c.getPrerequisites();
-            String toCourse = c.getSubject() + " " + c.getNumber();
-            if (prereqs != null){
-                for (int j = 0; j < prereqs.length; j++) {
-                    String fromCourse = prereqs[j];
-                    HashMap<String, String> map = new HashMap<>();
-                    map.put("from", fromCourse.trim());
-                    map.put("to", toCourse);
-                    map.put("weight", "1");
-                    // Change this to display html for a more complete description
-                    map.put("title", "<div><a class=\"button is-small\">" + fromCourse.trim() + " > " + toCourse + "</a></div>");
-                    adjList.add(map);
+        try {
+            CourseCatalog catalog = new CourseCatalog(prefix, "202180");
+            //
+            ArrayList<Course> list = catalog.getCourses();
+            for (Course c : list) {
+                String[] prereqs = c.getPrerequisites();
+                String toCourse = c.getSubject() + " " + c.getNumber();
+                if (prereqs != null) {
+                    for (int j = 0; j < prereqs.length; j++) {
+                        String fromCourse = prereqs[j];
+                        HashMap<String, String> map = new HashMap<>();
+                        map.put("from", fromCourse.trim());
+                        map.put("to", toCourse);
+                        map.put("weight", "1");
+                        // Change this to display html for a more complete description
+                        map.put("title", "<div><a class=\"button is-small\">" + fromCourse.trim() + " > " + toCourse + "</a></div>");
+                        adjList.add(map);
+                    }
                 }
             }
+        }catch(CatalogNotFoundException e) {
+
         }
+
         return adjList;
     }
 }
