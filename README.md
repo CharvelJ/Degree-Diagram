@@ -1,14 +1,9 @@
 ## README
 
-See the [Markdown Cheatsheet](https://stationinthemetro.com/wp-content/uploads/2013/04/Markdown_Cheat_Sheet_v1-1.pdf) for 
-information on how to format this file.
-
-You must document the following:
-
 ### Files
 Cloned the files from the following repository:
 ```
-https://gitlab.csc.tntech.edu/csc2310-fa21-students/cjohnson42/cjohnson42-coursepr-web-dev.git
+https://github.com/CharvelJ/Degree-Diagram.git
 ```
 
 ### Compile
